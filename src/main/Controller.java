@@ -58,7 +58,7 @@ public class Controller {
 		for(int i = 0; i < lines.size()-1; i++) end+=lines.get(i)+"\n";
 		end+=lines.get(lines.size()-1);
 		
-		return end;///
+		return end;
 	}
 	
 	private void getChunks(String source, ArrayList<String> chunks) {
