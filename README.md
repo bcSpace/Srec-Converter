@@ -6,7 +6,7 @@ This class is used for parsing the loaded data from the input file. Can either g
 
 ## Controller class
 
-This class is where the majority of logic is stored. It is called from the Gui class to run with a source path and write path. It will load the data from the input file, parse then format it and write it to the write path. 
+This class is where the majority of logic is stored. It is called from the Gui class to run with a source path and write path. It will load the data from the input file, parse then format and write to the write path. 
 
 ## Gui class
 
