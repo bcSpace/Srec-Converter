@@ -10,6 +10,6 @@ This class is where the majority of logic is stored. It is called from the Gui c
 
 ## Gui class
 
-Display for the user to use. Has 2 inputs, source path and write path. On a successful run it will fill the text area with the decoded input file. 
+Display for the user to use. Has 2 inputs, source path and write path. On a successful run it will fill the text area with the decoded input file. If a failure happens the user will be notified with error details. 
 
 ![Alt text](https://snag.gy/3pjTiX.jpg)
