@@ -12,11 +12,12 @@ public class Controller {
 		srec = new Srec();
 	}
 	
-	public String run(String sourcePath, String writePath) 
+	public String[] run(String sourcePath, String writePath) 
 		throws CustomError {
 		String[] sourceData = FileUtil.loadData(sourcePath);
+		byte bytes[] = srec.getBytes(sourceData);
 		FileUtil.write(writePath, srec.getBytes(sourceData));
-		return srec.decodeForDisplay(sourceData);
+		return new String[] {srec.decodeForDisplay(sourceData), new String(bytes)};
 	}
 	
 }

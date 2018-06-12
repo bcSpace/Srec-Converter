@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -22,7 +23,7 @@ public class Gui {
 	
 	private JTextField sourcePathField, writePathField;
 	private JButton go;
-	private JTextArea output;
+	private JTextArea decodedOutput, fileOutput;
 	
 	public Gui() {
 		frame = new JFrame();
@@ -49,8 +50,11 @@ public class Gui {
 		
 		go = new JButton("Run");
 		
-		output = new JTextArea(12,35);
-		output.setEditable(false);
+		decodedOutput = new JTextArea(12,35);
+		decodedOutput.setEditable(false);
+		
+		fileOutput = new JTextArea(12,35);
+		fileOutput.setEditable(false);
 		
 		JLabel labels[] = {new JLabel("Source"), new JLabel("Write")};
 		
@@ -61,9 +65,14 @@ public class Gui {
 		frame.add(writePathField);
 		frame.add(go);
 		
-		JScrollPane scroll = new JScrollPane(output);
+		JTabbedPane tab = new JTabbedPane();
 		
-		frame.add(scroll); //used for displaying decoded srec
+		JScrollPane scroll = new JScrollPane(decodedOutput), scroll1 = new JScrollPane(fileOutput);
+		
+		tab.add("Decoded", scroll);
+		tab.add("File output", scroll1);
+		
+		frame.add(tab); //used for displaying decoded srec
 		
 		frame.pack();
 		frame.setSize(600, 300);
@@ -101,8 +110,9 @@ public class Gui {
 		}
 		
 		try {
-			String output = controller.run(sourcePath, writePath);
-			this.output.setText(output); //show the user something pretty
+			String output[] = controller.run(sourcePath, writePath);
+			this.decodedOutput.setText(output[0]); //show the user something pretty
+			this.fileOutput.setText(output[1]);
 		} catch (CustomError e) {
 			errorMessage(e.getMessage());
 		} catch(Exception e) {e.printStackTrace(); errorMessage("UNEXPECTED: " + e.getMessage() + " | " + e); }
