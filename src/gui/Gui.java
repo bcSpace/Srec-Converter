@@ -109,13 +109,23 @@ public class Gui {
 			return;
 		}
 		
+		if(!writePath.endsWith(".binary")) if(!warningMessage()) return;
+		
 		try {
 			String output[] = controller.run(sourcePath, writePath);
 			this.decodedOutput.setText(output[0]); //show the user something pretty
 			this.fileOutput.setText(output[1]);
 		} catch (CustomError e) {
 			errorMessage(e.getMessage());
-		} catch(Exception e) {e.printStackTrace(); errorMessage("UNEXPECTED: " + e.getMessage() + " | " + e); }
+			return;
+		} catch(Exception e) {
+			e.printStackTrace(); 
+			errorMessage("UNEXPECTED: " + e.getMessage() + " | " + e);
+			return;
+		}
+		
+		successMessage(writePath);
+		
 	}
 	
 	private void errorMessage(String message) {
@@ -124,4 +134,22 @@ public class Gui {
 			    "Error",
 			    JOptionPane.ERROR_MESSAGE);
 	}
+	
+	private boolean warningMessage() {
+		int n = JOptionPane.showConfirmDialog(
+			    frame,
+			    "Are your sure that you want to use a non .binary file extension",
+			    "?",
+			    JOptionPane.YES_NO_OPTION);
+		
+		return n == 0;
+	}
+	
+	private void successMessage(String path) {
+		JOptionPane.showMessageDialog(frame,
+			    "File writen to: " + path,
+			    "Success",
+			    JOptionPane.INFORMATION_MESSAGE);
+	}
+	
 }
