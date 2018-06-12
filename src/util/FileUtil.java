@@ -33,7 +33,7 @@ public class FileUtil {
 		return a;
 	}
 	
-	public static void write(String cotents, String path) 
+	public static void write(String path, byte[] bytes) 
 			throws CustomError {
 		
 		//in case the dirs don't exist
@@ -42,7 +42,7 @@ public class FileUtil {
 		if(!file.exists()) file.mkdirs();
 		
 		try {
-			new FileOutputStream(path).write(cotents.getBytes());
+			new FileOutputStream(path).write(bytes);
 		} catch(Exception e) {
 			throw new CustomError("Failure to write file: " + e);
 		}

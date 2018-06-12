@@ -46,6 +46,7 @@ public class Gui {
 	private void comps() {
 		sourcePathField = new JTextField(15);
 		writePathField = new JTextField(15);
+		
 		go = new JButton("Run");
 		
 		output = new JTextArea(12,35);
@@ -104,7 +105,7 @@ public class Gui {
 			this.output.setText(output); //show the user something pretty
 		} catch (CustomError e) {
 			errorMessage(e.getMessage());
-		} catch(Exception e) {errorMessage("UNEXPECTED: " + e.getMessage() + " | " + e);}
+		} catch(Exception e) {e.printStackTrace(); errorMessage("UNEXPECTED: " + e.getMessage() + " | " + e); }
 	}
 	
 	private void errorMessage(String message) {
